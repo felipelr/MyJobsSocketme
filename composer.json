@@ -1,0 +1,14 @@
+{
+    "autoload": {
+        "psr-4": {
+            "MyApp\\": "src"
+        }
+    },
+    "require": {
+        "cboden/ratchet": "^0.4.2",
+        "kreait/firebase-php": "^4.40"
+    },
+    "scripts": {
+        "chat": "php bin/server.php"
+    }
+}

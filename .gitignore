@@ -1,0 +1,6 @@
+/vendor/*
+
+# Visual Studio Code
+.vscode
+
+/myjobstest-719a9-firebase-adminsdk-bjq4h-db0fea2767.json
