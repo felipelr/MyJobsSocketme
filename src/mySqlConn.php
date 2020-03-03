@@ -15,7 +15,7 @@ class MySqlConn
     public function saveMessage($type, $clienteId, $professionalId, $message)
     {
         try {
-            $conn = new PDO("mysql:host={$this->servername};dbname={$this->database}", $this->username, $this->password);
+            $conn = new PDO("mysql:host={$this->servername};dbname={$this->database}", $this->username, $this->password, [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
 
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -35,7 +35,7 @@ class MySqlConn
     public function saveClientResourceId($clientId, $resourceId)
     {
         try {
-            $conn = new PDO("mysql:host={$this->servername};dbname={$this->database}", $this->username, $this->password);
+            $conn = new PDO("mysql:host={$this->servername};dbname={$this->database}", $this->username, $this->password, [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
 
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -53,7 +53,7 @@ class MySqlConn
     public function saveProfessionalResourceId($professionalId, $resourceId)
     {
         try {
-            $conn = new PDO("mysql:host={$this->servername};dbname={$this->database}", $this->username, $this->password);
+            $conn = new PDO("mysql:host={$this->servername};dbname={$this->database}", $this->username, $this->password, [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
 
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -71,7 +71,7 @@ class MySqlConn
     public function getClientResourceId($clientId)
     {
         try {
-            $conn = new PDO("mysql:host={$this->servername};dbname={$this->database}", $this->username, $this->password);
+            $conn = new PDO("mysql:host={$this->servername};dbname={$this->database}", $this->username, $this->password, [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
 
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -95,7 +95,7 @@ class MySqlConn
     public function getProfessionalResourceId($professionalId)
     {
         try {
-            $conn = new PDO("mysql:host={$this->servername};dbname={$this->database}", $this->username, $this->password);
+            $conn = new PDO("mysql:host={$this->servername};dbname={$this->database}", $this->username, $this->password, [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
 
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

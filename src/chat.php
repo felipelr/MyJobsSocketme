@@ -76,6 +76,9 @@ class Chat implements MessageComponentInterface
             }
         }
 
+        //retorna a msg salva e com o id
+        $from->send(json_encode($msgJson));
+
         //recupera o codigo da conexao do destino
         $userTo = null;
         $userFrom = null;
@@ -107,8 +110,9 @@ class Chat implements MessageComponentInterface
                 $title = $userFrom != null ? $userFrom['name'] : 'MyJobs';
                 if ($userTo['fcm_token'] != '') {
                     try {
+                        $path = dirname(__DIR__) . '/myjobstest-719a9-firebase-adminsdk-bjq4h-db0fea2767.json';
                         $factory = (new Factory())
-                            ->withServiceAccount('/myjobstest-719a9-firebase-adminsdk-bjq4h-db0fea2767.json');
+                            ->withServiceAccount($path);
                         $messaging = $factory->createMessaging();
 
                         $messageFCM = CloudMessage::withTarget('token', $userTo['fcm_token'])
@@ -118,11 +122,12 @@ class Chat implements MessageComponentInterface
                                 'icon' => 'ic_launcher'
                             ])
                             ->withData([
-                                'message' => $msgJson
+                                'message' => json_encode($msgJson)
                             ]);
 
                         $messaging->send($messageFCM);
                     } catch (Exception $ex) {
+                        echo "Notification error => " . $ex->getMessage() . "\n";
                     }
                 }
             }
