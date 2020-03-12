@@ -7,9 +7,9 @@ use PDOException;
 
 class MySqlConn
 {
-    private $servername = "myjobs.mysql.dbaas.com.br";
-    private $username = "myjobs";
-    private $password = "myjobs@123";
+    private $servername = "localhost"; //myjobs.mysql.dbaas.com.br
+    private $username = "felipe";
+    private $password = "Myjobs@123";
     private $database = "myjobs";
 
     public function saveMessage($type, $clienteId, $professionalId, $message)

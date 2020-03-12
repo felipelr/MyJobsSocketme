@@ -34,7 +34,7 @@ class Chat implements MessageComponentInterface
                 'header' => "Authorization: Bearer " . $params->token
             ]
         ]);
-        $json = file_get_contents("http://myjobs.servicos.ws/ws/api/users/validate.json", false, $context);
+        $json = file_get_contents("http://localhost/ws/api/users/validate.json", false, $context);
         $deconde = json_decode($json, true);
 
         if (isset($deconde['success'])) {

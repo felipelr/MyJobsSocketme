@@ -21,7 +21,7 @@
     </form>
 
     <script type="text/javascript">
-        var conn = new WebSocket('ws://localhost:8080?type=client&from=36&to=2&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU2LCJleHAiOjE1ODQ4OTY3MzIsInJvbGUiOiJwcm9mZXNzaW9uYWwifQ.C1lfEquxj93PnVeaD9EqDDX6NpsMTyT9qILyZz63nJw');
+        var conn = new WebSocket('ws://67.205.160.187:8080?type=client&from=36&to=2&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjU2LCJleHAiOjE1ODQ4OTY3MzIsInJvbGUiOiJwcm9mZXNzaW9uYWwifQ.C1lfEquxj93P');
         //var conn = new WebSocket('ws://67.205.160.187:8080');
         conn.onmessage = function (e) {
             console.log(e.data);
