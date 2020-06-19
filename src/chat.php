@@ -88,6 +88,7 @@ class Chat implements MessageComponentInterface
 
         //dispara a mensagem para o destino
         if ($userTo != null) {
+            $msgJson['title'] = $userFrom['name'];
             $userFounded = false;
             foreach ($this->clients as $client) {
                 if ($client->resourceId === $userTo['websocket']) {
@@ -115,7 +116,7 @@ class Chat implements MessageComponentInterface
                             ->withNotification([
                                 'title' => $title,
                                 'body' => $msgJson['message'],
-                                'icon' => 'ic_launcher'
+                                'icon' => 'ic_myjobs'
                             ])
                             ->withData([
                                 'message' => json_encode($msgJson)

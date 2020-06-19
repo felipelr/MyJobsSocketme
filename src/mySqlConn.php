@@ -27,7 +27,7 @@ class MySqlConn
 
             return $id;
         } catch (PDOException $e) {
-            echo "Erro => " . $e->getMessage();
+            echo "Erro =>  cliente_id => $clienteId; professional_id => $professionalId " . $e->getMessage();
             return -1;
         }
     }
