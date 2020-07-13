@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat Test</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <form id="chat">
+        <input type="text" name="client_id" placeholder="Codigo do Cliente" value="74" />
+        <input type="text" name="professional_id" placeholder="Codigo do Profissional" value="29" />
+        <input type="datetime-local" name="date_time">
+        <input type="text" name="msg_from" placeholder="Remetente (client, professional)" value="client" />
+        <input type="text" name="token" placeholder="Token de autenticacao"
+            value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwNCwiZXhwIjoxNTk2NjU1NTc2LCJyb2xlIjoicHJvZmVzc2lvbmFsIn0.cqZpRMQ5a7ijjfQ4FJQKIHo3D3mn1M8PtO-PlTpzO7M" />
+        <div class="messages"></div>
+        <input type="text" name="message" placeholder="Digite sua mensagem" />
+        <button type="submit">Enviar</button>
+        <button type="button" onclick="conectar()">Conectar</button>
+    </form>
+
+    <script type="text/javascript">
+        var conn = {};
+        //token
+        //eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwNCwiZXhwIjoxNTk2NjU1NTc2LCJyb2xlIjoicHJvZmVzc2lvbmFsIn0.cqZpRMQ5a7ijjfQ4FJQKIHo3D3mn1M8PtO-PlTpzO7M
+
+        function conectar() {
+            const client_id = $('input[name=client_id]').val();
+            const professional_id = $('input[name=professional_id]').val();
+            const type = $('input[name=msg_from]').val();
+            const token = $('input[name=token]').val();
+            const from = type == 'client' ? client_id : professional_id;
+            const to = type == 'professional' ? client_id : professional_id;
+
+            conn = new WebSocket('ws://67.205.160.187:8080?type=' + type + '&from=' + from + '&to=' + to + '&token=' + token);
+
+            //var conn = new WebSocket('ws://67.205.160.187:8080');
+            conn.onmessage = function (e) {
+                console.log(e.data);
+                var messageObj = JSON.parse(e.data);
+                if (Array.isArray(messageObj)) {
+                    messageObj.forEach(element => {
+                        renderMessage(JSON.parse(element));
+                    });
+                }
+                else {
+                    renderMessage(messageObj);
+                }
+            };
+            conn.onopen = function (e) {
+                console.log('Socket Iniciado');
+            };
+        }
+
+        function renderMessage(message) {
+            $('.messages').append('<div class="message"><strong>' + message.msg_from + '</strong>: ' + message.message + ' </div>')
+        }
+
+        $('#chat').submit(function (event) {
+            event.preventDefault();
+
+            const message = $('input[name=message]').val();
+            const client_id = $('input[name=client_id]').val();
+            const professional_id = $('input[name=professional_id]').val();
+            const date_time = $('input[name=date_time]').val();
+            const msg_from = $('input[name=msg_from]').val();
+
+            $('input[name=message]').val("");
+
+            if (message.length) {
+                const messageObj = {
+                    client_id: parseInt(client_id),
+                    professional_id: parseInt(professional_id),
+                    message: message,
+                    date_time: date_time,
+                    msg_from: msg_from,
+                };
+
+                conn.send(JSON.stringify(messageObj));
+            }
+        });
+    </script>
+
+</body>
+
+</html>
